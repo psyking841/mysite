@@ -18,3 +18,12 @@ class Post(models.Model):
         self.render_text = self.content.replace('\n', '<br>')
         template = loader.get_template('blogs/post.html')
         return template.render({'p': self})
+
+
+class NewsPost(models.Model):
+    title = models.CharField(max_length=256)
+    link = models.CharField(max_length=256)
+    description = models.CharField(max_length=256)
+    pub_date = models.DateTimeField(max_length=512)
+    guid = models.CharField(max_length=64)
+    articletype = models.CharField(max_length=32)

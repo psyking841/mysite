@@ -1,11 +1,9 @@
-<!DOCTYPE html>
+{% extends "blogs/base.html" %}
 
-<html>
-  <head>
-    <title>Welcome!</title>
-  </head>
+{% block content %}
 
-  <body>
-    <h2>Welcome, {{username}}!</h2>
-  </body>
-</html>
+  <p>Welcome back, {{ username }}!</p>
+  <p>After 3 seconds you will be redirected to the front page</p>
+  <meta http-equiv="refresh" content="3;url={% url 'blogs:blog_front' %}">
+
+{% endblock %}

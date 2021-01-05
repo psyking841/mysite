@@ -6,6 +6,8 @@ from string import ascii_letters
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import Post, User
+from django.urls import reverse
+
 
 secret = 'fart'
 
@@ -23,7 +25,6 @@ EMAIL_RE = re.compile(r'^[\S]+@[\S]+\.[\S]+$')
 def valid_email(email):
     return not email or EMAIL_RE.match(email)
 
-##### user stuff
 def make_salt(length = 5):
     return (''.join(random.choice(ascii_letters) for x in range(length)))
 
@@ -50,7 +51,9 @@ def login(request):
         # Look up users
         u = User.objects.get(username=username)
         if u and valid_pw(username, password, u.password):
-            response = blog_front(request)
+            # response = blog_front(request)
+            response = HttpResponseRedirect(reverse('blogs:welcome', kwargs={'username': username}))
+            # response = HttpResponseRedirect('/blogs/welcome', {'username': 'AAA'})
             cookie_value = make_secure_val(u.id)
             response.set_cookie(key='user_id', value=cookie_value)
             return response
@@ -62,11 +65,22 @@ def login(request):
             return render(request, 'blogs/login-form.html', context)
 
 def logout(request):
-    response = blog_front(request)
-    response.set_cookie(key='user_id', value='')
+    response = HttpResponseRedirect('/blogs/signup')
+    response.delete_cookie(key='user_id')
     return response
 
 def blog_front(request):
+    # block user WO cookie
+    user_cookie = request.COOKIES.get('user_id')
+    if not user_cookie:
+        return HttpResponseRedirect(reverse('blogs:signup'))
+    user_id, h = user_cookie.split('|')
+    if not user_id.isdigit():
+        return HttpResponseRedirect(reverse('blogs:signup'))
+    if not h == hmac.new(secret.encode('utf-8'), user_id.encode('utf-8'),
+             digestmod='sha256').hexdigest():
+        return HttpResponseRedirect(reverse('blogs:signup'))
+
     latest_posts_list = Post.objects.order_by('-last_modified')[:5]
     context = {
         'posts': latest_posts_list,
@@ -101,8 +115,9 @@ def newpost(request):
             render("newpost.html", context)
 
 
-def welcome(request):
-    context = {'username': request.GET['username']}
+def welcome(request, username):
+    # context = {'username': request.GET['username']}
+    context = {'username': username}
     return render(request, 'blogs/welcome.html', context)
 
 
