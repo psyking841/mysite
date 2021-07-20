@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
+import environ
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,12 +26,17 @@ SECRET_KEY = 'mfi)8z-i&o39y#0je&++dfpgjgo20xk+c%avzbih)&sgxlz@sv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, DEBUG)
+)
 
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'], cast=str)
 
 # Application definition
 
 INSTALLED_APPS = [
+    'asciichan.apps.AsciichanConfig',
     'blogs.apps.BlogsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -73,12 +79,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+pg_host = 'localhost'
+if 'POSTGRES_HOST' in os.environ:
+    pg_host = os.environ['POSTGRES_HOST']
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        "HOST": 'localhost',
+        "HOST": pg_host,
         'USER': 'postgres',
         'PASSWORD': 'mysecretpassword'
     }

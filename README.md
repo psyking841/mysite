@@ -47,3 +47,18 @@ Then you can use either migrate or sqlmigrate to apply the changes.
 
 ## Admin portal
 An `admin` account has already been created. The password is `mysecretpassword`.
+
+## Build dockerfile
+```
+docker build -t psyking841/searching-engine:0.1 .
+```
+
+## Run docker compose
+```
+docker-compose -f docker-compose.yaml up -d
+# tear down
+# docker-compose -f docker-compose.yaml down
+```
+
+## Website
+URL: 

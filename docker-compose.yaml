@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+    postgres:
+        image: postgres:12
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=mysecretpassword
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        volumes:
+            - /Users/shengyip/Workspace/mysite/db_data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+
+    webserver:
+        image: psyking841/mysite:0.1
+        environment:
+            - POSTGRES_HOST=postgres
+        depends_on:
+            - postgres
+        ports:
+            - "8000:8000"

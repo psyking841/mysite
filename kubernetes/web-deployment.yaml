@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: website
+  name: website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: website
+  template:
+    metadata:
+      labels:
+        app: website
+        tier: app
+    spec:
+      containers:
+      - name: mysite
+        image: icr.io/shengyipan/mysite:0.1
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8000
+            protocol: TCP
+        env:
+          - name: POSTGRES_HOST
+            value: postgres
+          - name: DJANGO_ALLOWED_HOSTS
+#            value: '${webHostname},$(THIS_POD_IP)'
+            value: "kubenode,169.51.204.136"
+        command: ["/bin/bash", "-c"]
+        args: ["python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: website
+  name: website-service
+spec:
+  ports:
+    - name: tcp
+      port: 8000
+      targetPort: 8000
+  selector:
+    app: website
+  type: NodePort
