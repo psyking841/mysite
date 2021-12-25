@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: mysite
-        image: icr.io/shengyipan/mysite:0.1
+        image: icr.io/shengyipan/mysite:latest
         imagePullPolicy: Always
         ports:
           - containerPort: 8000

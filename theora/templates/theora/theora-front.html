@@ -1,0 +1,10 @@
+{% extends "theora/base.html" %}
+
+{% block content %}
+
+  {% for post in posts %}
+      {{ post.render }}
+      <br><br>
+  {% endfor %}
+
+{% endblock %}

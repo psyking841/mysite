@@ -1,0 +1,9 @@
+{% extends "theora/base.html" %}
+
+{% block content %}
+
+  <p>Welcome back, {{ username }}!</p>
+  <p>After 3 seconds you will be redirected to the front page</p>
+  <meta http-equiv="refresh" content="3;url={% url 'theora:theora_front' %}">
+
+{% endblock %}

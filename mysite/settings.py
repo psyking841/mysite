@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -36,14 +35,18 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'], cast=str)
 # Application definition
 
 INSTALLED_APPS = [
-    'asciichan.apps.AsciichanConfig',
-    'blogs.apps.BlogsConfig',
+    # 'asciichan.apps.AsciichanConfig',
+    # 'blogs.apps.BlogsConfig',
+    'theora.apps.TheoraConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
+    'django.contrib.redirects'
 ]
 
 MIDDLEWARE = [
@@ -76,7 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 pg_host = 'localhost'
@@ -84,6 +86,7 @@ if 'POSTGRES_HOST' in os.environ:
     pg_host = os.environ['POSTGRES_HOST']
 
 DATABASES = {
+    # POSTGRES settings
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
@@ -91,8 +94,17 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'mysecretpassword'
     }
+    # 'default': {
+    #     'ENGINE': 'ibm_db_django',
+    #     'NAME': 'BLUDB',
+    #     'USER': 'qgm68837',
+    #     'PASSWORD': 'PTFDPzmVD8pAel9I',
+    #     'HOST': '19af6446-6171-4641-8aba-9dcff8e1b6ff.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud',
+    #     'PORT': '30699',
+    #     'SECURITY': 'SSL',
+    #     'PCONNECT': True,  # Optional property, default is false
+    # }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -112,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -124,8 +135,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

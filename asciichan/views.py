@@ -12,7 +12,7 @@ def render_front(request, title='', art='', error='', arts=[]):
         'error': error,
         'arts': arts
     }
-    return render(request, 'asciichan/front.html', context)
+    return render(request, 'asciichan/theora-front.html', context)
 
 def front(request):
     if request.method == "GET":

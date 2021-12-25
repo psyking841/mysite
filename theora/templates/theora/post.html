@@ -1,0 +1,27 @@
+<div class="news">
+  <div class="news-heading">
+    <div class="source">
+      Source: {{p.news_source}}
+    </div>
+
+    <div class="news-title">
+      Title: {{p.title}}
+    </div>
+
+    <div class="publish-date">
+      Publish Date: {{p.pub_date|date:'Y-m-d H:i'}}
+    </div>
+
+    <div class="news-category">
+      Category: {{p.article_type}}
+    </div>
+  </div>
+
+  <div class="news-description">
+    Description: {{p.render_text}}
+  </div>
+
+  <div class="news-sentiment">
+    Sentiment Analysis: {{p.sentiment}}
+  </div>
+</div>
