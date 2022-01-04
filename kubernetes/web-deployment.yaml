@@ -28,7 +28,7 @@ spec:
             value: postgres
           - name: DJANGO_ALLOWED_HOSTS
 #            value: '${webHostname},$(THIS_POD_IP)'
-            value: "kubenode,169.51.204.136"
+            value: "kubenode,169.51.203.28,sypan.mynetgear.com"
         command: ["/bin/bash", "-c"]
         args: ["python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
 ---
@@ -43,6 +43,7 @@ spec:
     - name: tcp
       port: 8000
       targetPort: 8000
+      nodePort: 32208
   selector:
     app: website
   type: NodePort

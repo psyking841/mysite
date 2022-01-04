@@ -1,71 +1,84 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
+<head>
     <title>User Sign Up</title>
     <style type="text/css">
       .label {text-align: right}
       .error {color: red}
     </style>
 
-  </head>
+</head>
 
-  <body>
-    <h2>Signup</h2>
-    <form action="{% url 'theora:signup' %}" method="post">
-      {% csrf_token %}
-      <table>
+<body>
+<h2>Signup</h2>
+<form action="{% url 'theora:signup' %}" method="post">
+    {% csrf_token %}
+    <table>
         <tr>
-          <td class="label">
-            Username
-          </td>
-          <td>
-            <input type="text" name="username" value="{{username}}">
-          </td>
-          <td class="error">
-            {{error_username}}
-          </td>
+            <td class="label">
+                Username
+            </td>
+            <td>
+                <input type="text" name="username" value="{{username}}">
+            </td>
+            <td class="error">
+                {{error_username}}
+            </td>
         </tr>
 
         <tr>
-          <td class="label">
-            Password
-          </td>
-          <td>
-            <input type="password" name="password" value="">
-          </td>
-          <td class="error">
-            {{error_password}}
-          </td>
+            <td class="label">
+                Password
+            </td>
+            <td>
+                <input type="password" name="password" value="">
+            </td>
+            <td class="error">
+                {{error_password}}
+            </td>
         </tr>
 
         <tr>
-          <td class="label">
-            Verify Password
-          </td>
-          <td>
-            <input type="password" name="verify" value="">
-          </td>
-          <td class="error">
-            {{error_verify}}
-          </td>
+            <td class="label">
+                Verify Password
+            </td>
+            <td>
+                <input type="password" name="verify" value="">
+            </td>
+            <td class="error">
+                {{error_verify}}
+            </td>
         </tr>
 
         <tr>
-          <td class="label">
-            Email (optional)
-          </td>
-          <td>
-            <input type="text" name="email" value="{{email}}">
-          </td>
-          <td class="error">
-            {{error_email}}
-          </td>
+            <td class="label">
+                Email (optional)
+            </td>
+            <td>
+                <input type="text" name="email" value="{{email}}">
+            </td>
+            <td class="error">
+                {{error_email}}
+            </td>
         </tr>
-      </table>
 
-      <input type="submit">
-    </form>
-  </body>
+        <tr>
+            <td class="label">
+                Invitation Code
+            </td>
+            <td>
+                <input type="text" name="invitation" value="">
+            </td>
+            <td class="error">
+                {{error_invitation}}
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit">
+</form>
+<p> or <a href="/theora/login">Sign In</a></p>
+</body>
 
 </html>

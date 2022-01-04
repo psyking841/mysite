@@ -64,3 +64,8 @@ docker-compose -f docker-compose.yaml up -d
 # tear down
 # docker-compose -f docker-compose.yaml down
 ```
+
+## Access IBM COS image via pre-signed URL
+First, config [AWS CLI](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-uhc-hmac-credentials-main)
+[Link](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-presign-url)
+Current iamge [private link](https://s3.private.us.cloud-object-storage.appdomain.cloud/cloud-object-storage-dsx-cos-standard-g57/me.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=66bf90ffef924a379679da395b5581aa%2F20220103%2Fus-east%2Fs3%2Faws4_request&X-Amz-Date=20220103T034608Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3fd79c1b5c207884874aa95d8f72cc011694155ab89b15b48d0303ff562f5538)

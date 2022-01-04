@@ -13,5 +13,6 @@ urlpatterns = [
     path('welcome/(?P<username>\w+)/$', views.welcome, name='welcome'),
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
-    path('logout/', views.logout, name='logout')
+    path('logout/', views.logout, name='logout'),
+    path('shengyipan/', views.aboutme, name='aboutme')
 ]

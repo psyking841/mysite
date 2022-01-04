@@ -32,3 +32,10 @@ CREATE TABLE public."newsfeed"
     CONSTRAINT "newsfeed_pkey" PRIMARY KEY ("ID")
 )
 ```
+
+ALso need to add the node's public ID (go to the cloud console to see it) in the `DJANGO_ALLOWED_HOSTS`. 
+
+## Run with crawler
+1. Deploy DB in cluster
+2. Deploy crawler into cluster (this is another project). It will create a table call `theora_newsfeed` table in DB.
+3. Deploy web app in cluster

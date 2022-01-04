@@ -9,6 +9,7 @@ from .models import NewsFeed, User
 from django.urls import reverse
 
 secret = 'fart'
+invitation_code = 'invite-me-VIP'
 
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 PASS_RE = re.compile(r"^.{3,20}$")
@@ -123,8 +124,13 @@ def signup(request, **kwargs):
         password = request.POST['password']
         verify = request.POST['verify']
         email = request.POST['email']
+        invitation = request.POST['invitation']
 
         params = {'username': username, 'email': email}
+
+        if not invitation or invitation != invitation_code:
+            params['error_invitation'] = "You need an invitation code for sign up."
+            have_error = True
 
         if not valid_username(username):
             params['error_username'] = "That's not a valid username."
@@ -159,3 +165,7 @@ def signup(request, **kwargs):
             rep = HttpResponseRedirect('/theora/')
             rep.set_cookie(key='user_id', value=make_secure_val(u.id))
             return rep
+
+
+def aboutme(request):
+    return render(request, 'theora/about-me.html')

@@ -1,20 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <link type="text/css" rel="stylesheet" href="/static/main.css" />
+<table style="width: 100%; border-collapse: collapse; border-style: none;" border="0">
+    <tbody>
+    <tr>
+        <td style="width: 60px; text-align: center;"><a href="/theora/">Home</a></td>
+        <td style="width: 120px; text-align: center;"><a href="/theora/shengyipan">About Me</a></td>
+        <td style="text-align: right;">&nbsp;</td>
+        <td style="width: 60px; text-align: right;"><a href="/theora/signup">Sign Up</a></td>
+        <td style="width: 60px; text-align: right;"><a href="/theora/logout">Log Out</a></td>
+    </tr>
+    </tbody>
+</table>
 
-  <title>My Site</title>
+<head>
+    <link type="text/css" rel="stylesheet" href="/static/main.css"/>
+    <title>My Site</title>
 </head>
 
 <body>
-  <a href="/theora/" class="main-title">
+<a href="/theora/" class="main-title">
     Theora
-  </a>
+</a>
+<h3 style="text-align: center;">Media Article Sentiment Analysis</h3>
 
-  <div id="content">
-  {% block content %}
-  {% endblock %}
-  </div>
+<hr/>
+
+<table style="height: 333px; width: 100%; border-collapse: collapse;" border="0">
+    <tbody>
+    <tr style="height: 30px;">
+        <td style="width: 80%; height: 333px;" rowspan="4">
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </td>
+        <td style="width: 20%; height: 25px; text-align: center;">News Sources</td>
+    </tr>
+    <tr style="height: 200px;">
+        <td style="width: 20%; height: 119px;">Coming soon</td>
+    </tr>
+    <tr style="height: 30px;">
+        <td style="width: 20%; height: 20px; text-align: center;">Archives</td>
+    </tr>
+    <tr style="height: 200px;">
+        <td style="width: 18.17447495961228%; height: 169px;">Coming soon</td>
+    </tr>
+    </tbody>
+</table>
+
+<hr/>
+
+<table style="width: 100%; border-collapse: collapse;" border="0">
+    <tbody>
+    <tr>
+        <td style="width: 100%; text-align: center;">Pages 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 
 </html>
