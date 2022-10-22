@@ -69,3 +69,31 @@ docker-compose -f docker-compose.yaml up -d
 First, config [AWS CLI](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-uhc-hmac-credentials-main)
 [Link](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-presign-url)
 Current iamge [private link](https://s3.private.us.cloud-object-storage.appdomain.cloud/cloud-object-storage-dsx-cos-standard-g57/me.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=66bf90ffef924a379679da395b5581aa%2F20220103%2Fus-east%2Fs3%2Faws4_request&X-Amz-Date=20220103T034608Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3fd79c1b5c207884874aa95d8f72cc011694155ab89b15b48d0303ff562f5538)
+
+
+# The whole process to deploy Theora
+```
+# DB
+kubectl apply -f kubernetes/postgres-deployment.yaml
+
+# Switch to crawler project - wsj-pipeline
+kubectl apply -f kubernetes/deployment.yaml
+
+# Switch to web project
+kubectl apply -f kubernetes/web-deployment.yaml
+
+# If using No-IP domain, remember to point that domain to the new IP.
+```
+
+If there is changes to the code, including changes to about me
+```
+# remove older image, if any, using `docker images`
+docker rmi -f c0ed9c6e9198
+
+# Build docker image and push to registry
+docker build -t psyking841/mysite .
+docker tag psyking841/mysite icr.io/shengyipan/mysite
+docker push icr.io/shengyipan/mysite
+
+# deploy k8s
+```
